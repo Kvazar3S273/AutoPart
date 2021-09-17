@@ -17,12 +17,13 @@ class App extends Component {
           </h1>
           <h2>Houston, we have a problem</h2>
         </div>
-        <ArticleList articles={this.state.reverted ? articles.reverse() : articles} />
+        <ArticleList articles={this.state.reverted ? articles.slice().reverse() : articles} />
       </div>
     )
   }
-  revert = () => this.setState({
+  revert = () => {this.setState({
     reverted: !this.state.reverted
   })
+}
 }
   export default App
