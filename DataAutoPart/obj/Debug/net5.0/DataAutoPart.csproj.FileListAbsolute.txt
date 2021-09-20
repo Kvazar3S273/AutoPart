@@ -1,0 +1,15 @@
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\bin\Debug\net5.0\DataAutoPart.deps.json
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\bin\Debug\net5.0\DataAutoPart.dll
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\bin\Debug\net5.0\ref\DataAutoPart.dll
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\bin\Debug\net5.0\DataAutoPart.pdb
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.csprojAssemblyReference.cache
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.GeneratedMSBuildEditorConfig.editorconfig
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.AssemblyInfoInputs.cache
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.AssemblyInfo.cs
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.csproj.CoreCompileInputs.cache
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.dll
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\ref\DataAutoPart.dll
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.pdb
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\bin\Debug\net5.0\DataAutoPart.runtimeconfig.json
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\bin\Debug\net5.0\DataAutoPart.runtimeconfig.dev.json
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.genruntimeconfig.cache
