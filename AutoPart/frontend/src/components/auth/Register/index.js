@@ -24,18 +24,7 @@ export class RegisterPage extends Component {
     onSubmitFormHandler = async (e) => {
         e.preventDefault();
         console.log("Посилаємо на сервер", this.state);
-        // authService.register(this.state)
-        //     .then(result=>{
-        //         console.log("Server is good ", result);
-        //     },
-        //     error => {
-        //         console.log("Server is bad ", error);
-        //     })
-        //     .catch(errorServer => {
-
-        //     });
-
-
+     
         try{
             const result = await authService.register(this.state);
             console.log("Server is good ", result);
@@ -88,7 +77,7 @@ export class RegisterPage extends Component {
                     <TextBoxField 
                         field="confirmPassword"
                         type="password"
-                        label="Підтвердження пароль"
+                        label="Підтвердження пароля"
                         value={confirmPassword}
                         onChangeHandler={this.onChangeHandler}/>
                     

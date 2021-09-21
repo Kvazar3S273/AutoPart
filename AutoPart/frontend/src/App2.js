@@ -1,4 +1,4 @@
-// import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import {
@@ -10,7 +10,7 @@ import Header from './components/header';
 import RegisterPage from './components/auth/Register';
 import LoginPage from './components/auth/Login';
 
-class App extends React.Component {
+class App2 extends React.Component {
 
   render() {
     return (
@@ -33,4 +33,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App2;
