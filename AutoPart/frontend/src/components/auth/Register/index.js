@@ -31,7 +31,9 @@ export class RegisterPage extends Component {
             this.props.history.push("/");
         }
         catch(error) {
-            console.log("Server is bad ", error.response);
+            this.setState({errormessages:error.response.data.errors});
+             console.log(this.state.errormessages);
+            // console.log("Server is bad ", error.response);
         }
     }
 
@@ -42,7 +44,7 @@ export class RegisterPage extends Component {
             <div className="row">
                 <div className="offset-md-3 col-md-6">
                 <h1 className="text-center">Реєстрація</h1>
-                <form onSubmit={this.onSubmitFormHandler}>
+                <form className="row g-3 was-validated" onSubmit={this.onSubmitFormHandler}>
                     <TextBoxField 
                         field="email"
                         label="Електронна пошта"
@@ -81,7 +83,7 @@ export class RegisterPage extends Component {
                         value={confirmPassword}
                         onChangeHandler={this.onChangeHandler}/>
                     
-                    <button type="submit" className="btn btn-primary">Реєстрація</button>
+                    <button type="submit" className="btn btn-primary mt-4">Реєстрація</button>
                 </form>
                 </div>
 

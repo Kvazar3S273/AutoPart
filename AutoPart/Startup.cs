@@ -1,5 +1,8 @@
+using AutoPart.Models;
 using DataAutoPart;
 using DataAutoPart.Entities.Identity;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -38,6 +41,8 @@ namespace AutoPart
                 .AddEntityFrameworkStores<AppEFContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddControllersWithViews().AddFluentValidation();
+            services.AddTransient<IValidator<RegisterViewModel>, AccountValidator>();
 
             services.AddControllersWithViews();
 
