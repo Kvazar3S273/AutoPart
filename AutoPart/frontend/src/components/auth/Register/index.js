@@ -12,7 +12,11 @@ export class RegisterPage extends Component {
         firstName: '',
         secondName: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        err: '',
+        errormessages: {
+            email: ''
+        }
     }
 
     onChangeHandler = (e) => {
@@ -31,15 +35,15 @@ export class RegisterPage extends Component {
             this.props.history.push("/");
         }
         catch(error) {
-            this.setState({errormessages:error.response.data.errors});
-             console.log(this.state.errormessages);
-            // console.log("Server is bad ", error.response);
+            console.log("Server is bad ", error.response.data.errors);
+            this.setState({err:error.response.data.errors});
+            
         }
     }
 
     render() {
         //console.log("state", this.state);
-        const { email, phone, firstName, secondName, password, confirmPassword} = this.state;
+        const { email, phone, firstName, secondName, password, confirmPassword, err} = this.state;
         return (
             <div className="row">
                 <div className="offset-md-3 col-md-6">
@@ -49,39 +53,47 @@ export class RegisterPage extends Component {
                         field="email"
                         label="Електронна пошта"
                         value={email}
-                        onChangeHandler={this.onChangeHandler}/>
+                        onChangeHandler={this.onChangeHandler}
+                        err={this.err}/>
 
                     <TextBoxField 
                         field="phone"
                         label="Телефон"
                         value={phone}
-                        onChangeHandler={this.onChangeHandler}/>
+                        onChangeHandler={this.onChangeHandler}
+                        err="жопа"/>
 
                     <TextBoxField 
                         field="secondName"
                         label="Прізвище"
                         value={secondName}
-                        onChangeHandler={this.onChangeHandler}/>
+                        onChangeHandler={this.onChangeHandler}
+                        err="жопа"/>
 
                     <TextBoxField 
                         field="firstName"
                         label="Ім'я"
                         value={firstName}
-                        onChangeHandler={this.onChangeHandler}/>
+                        onChangeHandler={this.onChangeHandler}
+                        err="жопа"/>
+
 
                     <TextBoxField 
                         field="password"
                         type="password"
                         label="Пароль"
                         value={password}
-                        onChangeHandler={this.onChangeHandler}/>
+                        onChangeHandler={this.onChangeHandler}
+                        err="жопа"/>
 
                     <TextBoxField 
                         field="confirmPassword"
                         type="password"
                         label="Підтвердження пароля"
                         value={confirmPassword}
-                        onChangeHandler={this.onChangeHandler}/>
+                        onChangeHandler={this.onChangeHandler}
+                        err="жопа"/>
+
                     
                     <button type="submit" className="btn btn-primary mt-4">Реєстрація</button>
                 </form>

@@ -9,25 +9,10 @@ namespace AutoPart.Models
 {
     public class RegisterViewModel
     {
-        [Display(Name = "Email")]
-        [Required(ErrorMessage = "Обов'язкове поле")]
-        [EmailAddress(ErrorMessage = "Не коректна пошта")]
         public string Email { get; set; }
-
-        [Required(ErrorMessage = "Обов'язкове поле")]
         public string FirstName { get; set; }
-
-        [Required(ErrorMessage = "Обов'язкове поле")]
         public string SecondName { get; set; }
-
-        [Display(Name = "Phone")]
-        [Required(ErrorMessage = "Обов'язкове поле")]
-        [EmailAddress(ErrorMessage = "Не коректний номер телефону")]
         public string Phone { get; set; }
-
-        [Display(Name = "Password")]
-        [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Неправильний пароль")]
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
 

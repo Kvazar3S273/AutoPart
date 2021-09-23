@@ -5,7 +5,8 @@ const TextBoxField = ({
     value,
     label,
     type,
-    onChangeHandler
+    onChangeHandler,
+    err
 }) => {
     return (
         <div className="col-md-12">
@@ -18,8 +19,9 @@ const TextBoxField = ({
                 onChange={onChangeHandler}
                 required
             />
-            <div className="valid-feedback"> Добре є </div>
-            <div className="invalid-feedback"> Не повністю або неправильно заповнене поле! </div>
+            <label>{err}</label>
+            {/* <div className="valid-feedback"> Добре є </div>
+            <div className="invalid-feedback"> Не повністю або неправильно заповнене поле! </div> */}
         </div>
     );
 
@@ -30,7 +32,8 @@ TextBoxField.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    onChangeHandler: PropTypes.func.isRequired
+    onChangeHandler: PropTypes.func.isRequired,
+    err: PropTypes.string.isRequired
   };
 
 
