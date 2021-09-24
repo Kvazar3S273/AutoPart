@@ -26,19 +26,19 @@ namespace AutoPart.Models
                 .NotEmpty()
                 .MinimumLength(6)
                 .EmailAddress()
-                .WithMessage("Поле не може бути порожнім");
+                .WithMessage("Поле Email не може бути порожнім");
             RuleFor(x => x.Password)
                 .NotEmpty()
                 .MinimumLength(5)
-                .WithMessage("Поле не може бути порожнім");
+                .WithMessage("Поле Password не може бути порожнім");
             RuleFor(x => x.ConfirmPassword)
                 .Equal(x => x.Password)
-                .WithMessage("Поле не може бути порожнім");
+                .WithMessage("Поле ConfirmPassword не може бути порожнім");
             RuleFor(x => x.Phone)
                 .NotEmpty()
                 .MinimumLength(10)
                 .MaximumLength(11)
-                .WithMessage("Поле не може бути порожнім");
+                .WithMessage("Поле Phone не може бути порожнім");
 
         }
     }

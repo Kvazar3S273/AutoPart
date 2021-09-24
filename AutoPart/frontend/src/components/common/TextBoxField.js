@@ -5,21 +5,21 @@ const TextBoxField = ({
     value,
     label,
     type,
-    onChangeHandler,
-    err
+    num,
+    onChangeHandler
 }) => {
     return (
         <div className="col-md-12">
-            <label htmlFor={field} className="form-label">{label}</label>
+            <label htmlFor={field} className="form-label">{label}+{num}</label>
             <input type={type}
                 className="form-control is valid"
                 id={field}
                 name={field}
+                num={num}
                 value={value}
                 onChange={onChangeHandler}
                 required
             />
-            <label>{err}</label>
             {/* <div className="valid-feedback"> Добре є </div>
             <div className="invalid-feedback"> Не повністю або неправильно заповнене поле! </div> */}
         </div>
@@ -32,8 +32,7 @@ TextBoxField.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    onChangeHandler: PropTypes.func.isRequired,
-    err: PropTypes.string.isRequired
+    onChangeHandler: PropTypes.func.isRequired
   };
 
 
