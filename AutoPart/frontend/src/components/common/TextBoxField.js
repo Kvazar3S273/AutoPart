@@ -1,27 +1,24 @@
 import PropTypes from "prop-types";
+import classnames from "classnames";
 
 const TextBoxField = ({
     field,
+    className,
     value,
     label,
     type,
-    num,
     onChangeHandler
 }) => {
     return (
         <div className="col-md-12">
-            <label htmlFor={field} className="form-label">{label}+{num}</label>
+            <label htmlFor={field} className="form-label">{label}</label>
             <input type={type}
-                className="form-control is valid"
+                className={className}
                 id={field}
                 name={field}
-                num={num}
                 value={value}
                 onChange={onChangeHandler}
-                required
             />
-            {/* <div className="valid-feedback"> Добре є </div>
-            <div className="invalid-feedback"> Не повністю або неправильно заповнене поле! </div> */}
         </div>
     );
 
@@ -32,12 +29,14 @@ TextBoxField.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired,
     onChangeHandler: PropTypes.func.isRequired
   };
 
 
 TextBoxField.defaultProps ={
-    type: "text"
+    type: "text",
+    className: "form-control is-invalid"
 }
 
 export default TextBoxField;

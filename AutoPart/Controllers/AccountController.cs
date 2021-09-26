@@ -1,4 +1,5 @@
-﻿using AutoPart.Models;
+﻿using AutoPart.Constants;
+using AutoPart.Models;
 using DataAutoPart.Entities.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -29,23 +30,44 @@ namespace AutoPart.Controllers
         [Route("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterViewModel model)
         {
-            AccountValidator validRules = new();
-            var res = validRules.ValidateAsync(model);
+            //AccountValidator validRules = new();
+            //var res = validRules.ValidateAsync(model);
 
             //якщо модель не валідна:
-            if (!res.Result.IsValid)
-            {
-                return BadRequest(res.Result.Errors);
-            }
+            //if (!res.Result.IsValid)
+            //{
+            //    return BadRequest(res.Result.Errors);
+            //}
 
             //шукаю користувача по емейлу.
-            var user = await _userManager.FindByEmailAsync(model.Email);
+            //var user = await _userManager.FindByEmailAsync(model.Email);
 
             //якщо такий користувач вже існує:
-            if (user != null)
+            //if (user != null)
+            //{
+            //    return BadRequest(new { message = "Такий користувач вже існує" });
+            //}
+
+            var user = new AppUser
             {
-                return BadRequest(new { message = "Такий користувач вже існує" });
-            }
+                Email = model.Email,
+                UserName = model.FirstName
+
+            };
+
+            var role = new AppRole
+            {
+                Name = Roles.User
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+                return BadRequest(new { message = result.Errors });
+
+            await _userManager.AddToRoleAsync(user, role.Name);
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
 
             return Ok();
         }

@@ -24,21 +24,30 @@ namespace AutoPart.Models
         {
             RuleFor(x => x.Email)
                 .NotEmpty()
+                .WithMessage("Поле Email не може бути порожнім")
                 .MinimumLength(6)
                 .EmailAddress()
-                .WithMessage("Поле Email не може бути порожнім");
+                .WithMessage("Помилка заповнення поля Email");
             RuleFor(x => x.Password)
                 .NotEmpty()
+                .WithMessage("Поле Password не може бути порожнім")
                 .MinimumLength(5)
-                .WithMessage("Поле Password не може бути порожнім");
-            RuleFor(x => x.ConfirmPassword)
-                .Equal(x => x.Password)
-                .WithMessage("Поле ConfirmPassword не може бути порожнім");
+                .WithMessage("Пароль не може бути коротший, ніж 5 символів")
+                .Matches(@"\d")
+                .WithName("Password")
+                .WithMessage("Пароль повинен містити хоча б одну цифру");
             RuleFor(x => x.Phone)
                 .NotEmpty()
+                .WithMessage("Поле Phone не може бути порожнім")
                 .MinimumLength(10)
                 .MaximumLength(11)
-                .WithMessage("Поле Phone не може бути порожнім");
+                .WithMessage("Має бути не менше 10 і не більше 11 цифр");
+            RuleFor(x => x.ConfirmPassword)
+                .NotEmpty()
+                .WithMessage("Поле ConfirmPassword не може бути порожнім")
+                .Equal(x=>x.Password)
+                .WithMessage("Введене підтвердження не співпадає з паролем");
+
 
         }
     }

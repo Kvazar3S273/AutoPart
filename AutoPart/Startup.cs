@@ -1,3 +1,4 @@
+using AutoPart.Constants;
 using AutoPart.Models;
 using DataAutoPart;
 using DataAutoPart.Entities.Identity;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 
 namespace AutoPart
 {
@@ -44,7 +46,7 @@ namespace AutoPart
             services.AddControllersWithViews().AddFluentValidation();
             services.AddTransient<IValidator<RegisterViewModel>, AccountValidator>();
 
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -55,7 +57,9 @@ namespace AutoPart
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, 
+                                IWebHostEnvironment env, 
+                                RoleManager<AppRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -69,6 +73,23 @@ namespace AutoPart
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
+            if (!roleManager.Roles.Any())
+            {
+                var result = roleManager.CreateAsync(new AppRole
+                {
+                    Name = Roles.Admin
+                }).Result;
+
+                result = roleManager.CreateAsync(new AppRole
+                {
+                    Name = Roles.User
+                }).Result;
+
+                result = roleManager.CreateAsync(new AppRole
+                {
+                    Name = Roles.Manager
+                }).Result;
+            }
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import authService from '../../../services/auth.service';
 import TextBoxField from '../../common/TextBoxField';
 import ReactDOM from 'react-dom';
+import classnames from 'classnames';
 
 export class RegisterPage extends Component {
 
@@ -12,9 +13,13 @@ export class RegisterPage extends Component {
         firstName: '',
         secondName: '',
         password: '',
-        confirmPassword: '',
-        errormessages: {
-        }
+        confirmpassword: '',
+        errormessage: {
+            email:'',
+            phone:'',
+            password:'',
+            confirmpassword:''
+        }     
     }
 
     onChangeHandler = (e) => {
@@ -33,82 +38,131 @@ export class RegisterPage extends Component {
             this.props.history.push("/");
         }
         catch(error) {
-         var err = error.response.data.errors;
-         var takeerr = Object.keys(err).map((key) => err[key]);
-         const listErrors=takeerr.map((item) => <li key={item}>{item}</li>);
-         this.setState({errormessages: listErrors});
-         console.log(this.state.errormessages);
+         
+            let answer_errors={
+                email:'',
+                phone:'',
+                password:'',
+                confirmpassword:''
+            };
+
+            var res = error.response.data.errors;
+            console.log(res);    
+            if(res.Email)
+            {
+                let str = "";
+                res.Email.forEach(element => {
+                    str += element + " ";
+                    console.log(element);
+                });
+                answer_errors.email = str;
+            }
+           
+            if(res.Phone)
+            {
+                let str = "";
+                    res.Phone.forEach(element => {
+                        str += element + " ";
+                        console.log(element);
+                    });
+                    answer_errors.phone = str;
+           }
+
+           if(res.Password)
+           {
+               let str = "";
+                   res.Password.forEach(element => {
+                       str += element + " ";
+                       console.log(element);
+                   });
+                   answer_errors.password = str;
+           }
+
+           if(res.ConfirmPassword)
+           {
+               let str = "";
+                   res.ConfirmPassword.forEach(element => {
+                       str += element + " ";
+                       console.log(element);
+                   });
+                   answer_errors.confirmpassword = str;
+           }           
+           
+             this.setState({errormessage:answer_errors});
+             console.log(this.state.errormessage.confirmpassword);
+
         }
     }
 
     render() {
         //console.log("state", this.state);
-        const { email, phone, firstName, secondName, password, confirmPassword, errormessages, num} = this.state;
+        const { email, phone, firstName, secondName, password, confirmpassword, errormessage} = this.state;
         return (
             <div className="row">
                 <div className="offset-md-3 col-md-6">
                 <h1 className="text-center">Реєстрація</h1>
-                <form className="row g-3 was-validated" onSubmit={this.onSubmitFormHandler}>
+                <form className="row g-3 needs-validation" onSubmit={this.onSubmitFormHandler}>
                     <TextBoxField 
                         field="email"
                         label="Електронна пошта"
-                        num="0"
                         value={email}
-                        onChangeHandler={this.onChangeHandler}/>
-                        <span className="text-danger">{errormessages[num]}</span>
+                        onChangeHandler={this.onChangeHandler}
+                        className="form-control is-valid" 
+                        />
+                         {!!errormessage.email && <span className="text-danger">
+                             {errormessage.email}</span>}
                     
                     <TextBoxField 
                         field="phone"
                         label="Телефон"
-                        num="1"
-
                         value={phone}
-                        onChangeHandler={this.onChangeHandler}/>
-                        <span className="text-danger">{errormessages[num]}</span>
+                        onChangeHandler={this.onChangeHandler}
+                        className="form-control is-valid"
+                        />
+                        {!!errormessage.phone && <span className="text-danger">
+                            {errormessage.phone}</span>}
 
                     <TextBoxField 
                         field="secondName"
                         label="Прізвище"
-                        num="2"
-
                         value={secondName}
-                        onChangeHandler={this.onChangeHandler}/>
-                        <span className="text-danger">{errormessages[num]}</span>
+                        onChangeHandler={this.onChangeHandler}
+                        className="form-control is-valid"
+                        />
 
                     <TextBoxField 
                         field="firstName"
                         label="Ім'я"
-                        num="3"
-
                         value={firstName}
-                        onChangeHandler={this.onChangeHandler}/>
-                        <span className="text-danger">{errormessages[num]}</span>
+                        onChangeHandler={this.onChangeHandler}
+                        className="form-control is-valid"
+                        />
 
                     <TextBoxField 
                         field="password"
                         type="password"
                         label="Пароль"
-                        num="4"
-
                         value={password}
-                        onChangeHandler={this.onChangeHandler}/>
-                        <span className="text-danger">{errormessages[num]}</span>
+                        onChangeHandler={this.onChangeHandler}
+                        className="form-control is-valid"
+                        />
+                        {!!errormessage.password && <span className="text-danger">
+                            {errormessage.password}</span>}
 
                     <TextBoxField 
-                        field="confirmPassword"
+                        field="confirmpassword"
                         type="password"
                         label="Підтвердження пароля"
-                        num="5"
-
-                        value={confirmPassword}
-                        onChangeHandler={this.onChangeHandler}/>
-                        <span className="text-danger">{errormessages[num]}</span>
-
+                        value={confirmpassword}
+                        onChangeHandler={this.onChangeHandler}
+                        className="form-control is-valid"
+                        />
+                        {!!errormessage.confirmpassword && <span className="text-danger">
+                            {errormessage.confirmpassword}</span>}
                     
                     <button type="submit" className="btn btn-primary mt-4">Реєстрація</button>
                 </form>
                 </div>
-
             </div>
         )
     }
