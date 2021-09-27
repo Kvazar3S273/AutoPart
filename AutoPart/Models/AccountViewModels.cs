@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using DataAutoPart;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,14 +21,20 @@ namespace AutoPart.Models
 
     public class AccountValidator : AbstractValidator<RegisterViewModel>
     {
-        public AccountValidator()
+        private readonly AppEFContext _appEFContext;
+        public AccountValidator(AppEFContext appEFContext)
         {
+            _appEFContext = appEFContext;
+
             RuleFor(x => x.Email)
                 .NotEmpty()
                 .WithMessage("Поле Email не може бути порожнім")
                 .MinimumLength(6)
                 .EmailAddress()
-                .WithMessage("Помилка заповнення поля Email");
+                .WithMessage("Помилка заповнення поля Email")
+                .Must(IsValidEmail)
+                .WithName("Email")
+                .WithMessage("Такий користувач вже існує");
             RuleFor(x => x.Password)
                 .NotEmpty()
                 .WithMessage("Поле Password не може бути порожнім")
@@ -47,8 +54,22 @@ namespace AutoPart.Models
                 .WithMessage("Поле ConfirmPassword не може бути порожнім")
                 .Equal(x=>x.Password)
                 .WithMessage("Введене підтвердження не співпадає з паролем");
+            RuleFor(x => x.FirstName)
+                .NotEmpty()
+                .WithMessage("Поле ім'я не може бути порожнім");
+            RuleFor(x => x.SecondName)
+                .NotEmpty()
+                .WithMessage("Поле прізвище не може бути порожнім");
 
-
+        }
+        private bool IsValidEmail(string email)
+        {
+            var user = _appEFContext.Users.FirstOrDefault(x => x.Email == email);
+            if (user == null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
