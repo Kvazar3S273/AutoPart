@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 const Header = () => {
-    const {isAuth} = useSelector(redux => redux.auth);
+    const {isAuth, username} = useSelector(redux => redux.auth);
     console.log("Auth user info", isAuth);
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,6 +29,9 @@ const Header = () => {
                         </ul>
                         :
                         <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/profile">{username}</Link>
+                            </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/login">Вихід</Link>
                             </li>
