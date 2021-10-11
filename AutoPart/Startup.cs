@@ -1,9 +1,12 @@
 using AutoPart.Constants;
+using AutoPart.Helper;
 using AutoPart.Models;
+using AutoPart.Services;
 using DataAutoPart;
 using DataAutoPart.Entities.Identity;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +16,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System.Linq;
+using System.Text;
 
 namespace AutoPart
 {
@@ -43,10 +48,35 @@ namespace AutoPart
                 .AddEntityFrameworkStores<AppEFContext>()
                 .AddDefaultTokenProviders();
 
+            // Налаштування конфігурації з файла AppSettings
+            var appSettingSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingSection);
+
+            // Додавання автентифікації JWT
+            var appsettings = appSettingSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appsettings.Key);
+
+            services.AddAuthentication(auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(jwt =>
+            {
+                jwt.RequireHttpsMetadata = false;
+                jwt.SaveToken = false;
+                jwt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            services.AddScoped<IJwtTokenService, JwtTokenServise>();
+
             services.AddControllersWithViews().AddFluentValidation();
             services.AddTransient<IValidator<RegisterViewModel>, AccountValidator>();
-
-            //services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -90,6 +120,11 @@ namespace AutoPart
                     Name = Roles.Manager
                 }).Result;
             }
+
+            // Додаємо адміна 1 раз
+            //app.AdminConfig();
+
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

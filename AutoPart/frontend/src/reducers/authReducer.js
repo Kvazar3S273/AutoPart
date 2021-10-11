@@ -1,9 +1,11 @@
 import { LOGIN } from "../constants/actionTypes";
 import { REGISTER } from "../constants/actionTypes";
+import { LOGOUT } from "../constants/actionTypes";
 
 const initialState = {
     isAuth: false,
-    username: ""
+    username: "",
+    role:""
 }
 
 const authReducer = (state = initialState, action) => {
@@ -15,6 +17,13 @@ const authReducer = (state = initialState, action) => {
                 isAuth: true,
                 username: payload
             };
+        }
+        case LOGOUT: {
+            return {
+                isAuth: false,
+                username: "",
+                role:""
+            }
         }
     }
 
