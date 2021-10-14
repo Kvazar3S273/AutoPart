@@ -1,7 +1,7 @@
-import {useField} from 'formik';
+import { useField } from 'formik';
 import classNames from 'classnames';
 
-const MyTextInput = ({label, ...props}) => {
+const MyTextInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <div className="mb-3">
@@ -12,7 +12,7 @@ const MyTextInput = ({label, ...props}) => {
             )} {...field} {...props} />
             {(meta.touched && meta.error) &&
                 <div className="invalid-feedback">{meta.error} </div>}
-            </div>
+        </div>
     );
 };
 

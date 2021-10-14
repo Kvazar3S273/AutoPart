@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { REGISTER } from '../../../constants/actionTypes';
 import { ERRORS } from '../../../constants/actionTypes';
 import authTokenRequest from '../../../services/authRequest';
+import MyPhotoInput from '../../common/MyPhotoInput';
 
 authTokenRequest
 
@@ -19,6 +20,7 @@ const RegisterPage = () => {
         phone: '',
         firstName: '',
         secondName: '',
+        photo: null,
         password: '',
         confirmpassword: ''
     }
@@ -31,10 +33,10 @@ const RegisterPage = () => {
         try {
             const result = await authService.register(values);
             console.log("Server is good ", result);
-            var jwt_token=result.data.token;
+            var jwt_token = result.data.token;
             dispatch({ type: REGISTER, payload: verified });
-            localStorage.setItem('Current user',jwt_token);
-            console.log("Local:",localStorage);
+            localStorage.setItem('Current user', jwt_token);
+            console.log("Local:", localStorage);
             authTokenRequest(jwt_token);
             history.push("/");
         }
@@ -59,9 +61,9 @@ const RegisterPage = () => {
             console.log("Server is bad ", error.response);
         }
     }
-    
-    const {errorvalid} = useSelector(res=>res.valid);
-    console.log("Error valid",errorvalid);
+
+    const { errorvalid } = useSelector(res => res.valid);
+    console.log("Error valid", errorvalid);
 
     return (
         <div className="row">
@@ -99,6 +101,10 @@ const RegisterPage = () => {
                             name="firstName"
                             id="firstName"
                             type="text"
+                        />
+
+                        <MyPhotoInput
+                            field="photo"
                         />
 
                         <MyTextInput
