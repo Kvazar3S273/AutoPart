@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useHistory } from "react-router-dom";
+import { useRef } from 'react';
 import authService from '../../../services/auth.service';
 import MyTextInput from '../../common/MyTextInput';
 import validationFields from './validation';
@@ -24,10 +25,9 @@ const RegisterPage = () => {
         password: '',
         confirmpassword: ''
     }
-
-
     const history = useHistory();
     const dispatch = useDispatch();
+    const refFormik = useRef();
 
     const onSubmitHandler = async (values) => {
         try {
@@ -70,6 +70,7 @@ const RegisterPage = () => {
             <div className="offset-md-3 col-md-6">
                 <h1 className="text-center">Реєстрація</h1>
                 <Formik
+                    innerRef={refFormik}
                     initialValues={initState}
                     validationSchema={validationFields()}
                     onSubmit={onSubmitHandler}>
@@ -104,6 +105,7 @@ const RegisterPage = () => {
                         />
 
                         <MyPhotoInput
+                            refFormik={refFormik}
                             field="photo"
                         />
 

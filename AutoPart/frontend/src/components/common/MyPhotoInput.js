@@ -1,5 +1,6 @@
 import { useState } from "react";
 const MyPhotoInput = ({
+    refFormik,
     field
 }) => {
     const [photo, setPhoto] = useState("http://www.hollywoodprimaryschool.co.uk/wp-content/uploads/male-placeholder-600x600.jpg");
@@ -7,6 +8,7 @@ const MyPhotoInput = ({
     const onChangeHandler = (event) => {
         const file = event.currentTarget.files[0];
         setPhoto(URL.createObjectURL(file));
+        refFormik.current.setFieldValue(field,file);
     }
 
     return (
