@@ -2,12 +2,12 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { useHistory } from "react-router-dom";
 import { useRef } from 'react';
-import authService from '../../../services/auth.service';
+//import authService from '../../../services/auth.service';
 import MyTextInput from '../../common/MyTextInput';
 import validationFields from './validation';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { REGISTER } from '../../../constants/actionTypes';
+//import { REGISTER } from '../../../constants/actionTypes';
 import { ERRORS } from '../../../constants/actionTypes';
 import authTokenRequest from '../../../services/authRequest';
 import MyPhotoInput from '../../common/MyPhotoInput';
@@ -31,14 +31,17 @@ const RegisterPage = () => {
 
     const onSubmitHandler = async (values) => {
         try {
-            const result = await authService.register(values);
-            console.log("Server is good ", result);
-            var jwt_token = result.data.token;
-            dispatch({ type: REGISTER, payload: verified });
-            localStorage.setItem('Current user', jwt_token);
-            console.log("Local:", localStorage);
-            authTokenRequest(jwt_token);
-            history.push("/");
+            //const result = await authService.register(values);
+            const formData = new FormData();
+            //console.log("Server is good ", result);
+            //var jwt_token = result.data.token;
+            Object.entries(values).forEach(([key, value])=>formData.append(key,value));
+            //dispatch({ type: REGISTER, payload: verified });
+            dispatch(RegisterUser(formData));
+            //localStorage.setItem('Current user', jwt_token);
+            //console.log("Local:", localStorage);
+            //authTokenRequest(jwt_token);
+            //history.push("/");
         }
         catch (err) {
 
@@ -51,19 +54,17 @@ const RegisterPage = () => {
 
             if (res.Email) {
                 let str = "";
-                res.Email.forEach(element => {
-                    str += element + " ";
-                });
+                res.Email.forEach(element => {str += element+" ";});
                 answer_errors.email = str;
             }
             dispatch({ type: ERRORS, payloads: answer_errors.email });
 
-            console.log("Server is bad ", error.response);
+            //console.log("Server is bad ", error.response);
         }
     }
 
     const { errorvalid } = useSelector(res => res.valid);
-    console.log("Error valid", errorvalid);
+    //console.log("Error valid", errorvalid);
 
     return (
         <div className="row">

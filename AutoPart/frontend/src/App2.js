@@ -10,6 +10,7 @@ import Header from './components/header';
 import RegisterPage from './components/auth/Register';
 import LoginPage from './components/auth/Login';
 import HomePage from './components/home';
+import GetUserList from './components/userlist';
 
 class App2 extends React.Component {
 
@@ -19,9 +20,13 @@ class App2 extends React.Component {
         <Header />
         <div className="container">
           <Switch>
-            <Route exact path="/">
-              <LoginPage />
+            <Route exact path="/home">
+              <HomePage />
             </Route>
+
+            <Route exact path="/userlist">
+              <GetUserList />
+              </Route> 
 
             <Route exact path="/register">
               <RegisterPage />

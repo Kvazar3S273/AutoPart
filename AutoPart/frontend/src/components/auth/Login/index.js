@@ -4,6 +4,10 @@ import MyTextInput from '../../common/MyTextInput';
 import validationFields from './validation';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { LOGIN } from '../../../constants/actionTypes';
+import authTokenRequest from '../../../services/authRequest';
+import registerService from '../../../services/register.service';
+import jwt from "jsonwebtoken";
 
 const LoginPage = () => {
 
@@ -17,17 +21,16 @@ const LoginPage = () => {
         try {
             const formData = new FormData();
             Object.entries(values).forEach(([key, value]) => formData.append(key, value));
-            const result = await register_service.login(formData);
+            const result = await registerService.login(formData);
           
-            console.log("Відправлені дані: ", values);
+            console.log("Sended data: ", values);
             console.log("Result data:", result.data.token);
-
             var jwt_token = result.data.token;
-            var verified = jwt.decode(jwt_token);
-            console.log("Verified:",verified);
-            console.log("Verified.roles:", verified.roles);
+            var verifiedData = jwt.decode(jwt_token);
+            console.log("Verified:",verifiedData);
+            console.log("Verified.roles:", verifiedData.roles);
 
-            dispatch({ type: LOGIN_AUTH, payload: verified });
+            dispatch({ type: LOGIN, payload: verifiedData });
             localStorage.setItem('Current user', jwt_token);         
                    
             authTokenRequest(jwt_token);

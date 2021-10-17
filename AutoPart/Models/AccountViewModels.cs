@@ -1,5 +1,6 @@
 ﻿using DataAutoPart;
 using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,6 +15,7 @@ namespace AutoPart.Models
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Phone { get; set; }
+        public IFormFile Photo { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
 

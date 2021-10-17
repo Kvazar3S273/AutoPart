@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import {logoutservice} from '../../services/logout.service';
-import {LOGOUT} from "../../constants/actionTypes";
+import { useSelector } from 'react-redux';
+import { logoutservice } from '../../services/logout.service';
+import { LOGOUT } from "../../constants/actionTypes";
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -10,13 +10,13 @@ const Header = () => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const logout=()=> {
+    const logout = () => {
         logoutservice.logout();
-            dispatch({type: LOGOUT});
-            history.push('/');
-        };
+        dispatch({ type: LOGOUT });
+        history.push('/');
+    };
 
-    const {role, username} = useSelector(redux => redux.auth);
+    const { role, username } = useSelector(redux => redux.auth);
     //console.log("Auth user info", isAuth);
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,7 +31,16 @@ const Header = () => {
                             <Link className="nav-link active" aria-current="page" to="/">Головна</Link>
                         </li>
                     </ul>
-                    {role==""?
+
+                    {role == "admin" ?
+                        < li className="nav-item">
+                            <Link className="nav-link" to="/user">UserList</Link>
+                        </li>
+                        :
+                        null
+                    }
+
+                    {role == "" ?
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/login">Вхід</Link>

@@ -1,6 +1,7 @@
 using AutoPart.Constants;
 using AutoPart.Helper;
 using AutoPart.Models;
+using AutoPart.Models.Mapper;
 using AutoPart.Services;
 using DataAutoPart;
 using DataAutoPart.Entities.Identity;
@@ -15,9 +16,12 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace AutoPart
@@ -74,9 +78,9 @@ namespace AutoPart
             });
 
             services.AddScoped<IJwtTokenService, JwtTokenServise>();
-
             services.AddControllersWithViews().AddFluentValidation();
             services.AddTransient<IValidator<RegisterViewModel>, AccountValidator>();
+            services.AddAutoMapper(typeof(UserProfile));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -124,6 +128,18 @@ namespace AutoPart
             // Додаємо адміна 1 раз
             //app.AdminConfig();
 
+            string folder = "images";
+            var dir = Path.Combine(Directory.GetCurrentDirectory(), folder);
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(dir),
+                RequestPath = "/images"
+            });
 
             app.UseRouting();
 

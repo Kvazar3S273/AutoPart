@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,12 +36,27 @@ namespace AutoPart.Controllers
         [Route("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterViewModel model)
         {
+            string fileUsername = string.Empty;
+
+            if (model.Photo != null)
+            {
+                var ext = Path.GetExtension(model.Photo.FileName);
+                fileUsername = Path.GetRandomFileName() + ext;
+                var dir = Path.Combine(Directory.GetCurrentDirectory(), "images");
+                var path = Path.Combine(dir, fileUsername);
+
+                using (var stream = System.IO.File.Create(path))
+                {
+                    await model.Photo.CopyToAsync(stream);
+                }
+            }
             try
             {
                 var user = new AppUser
                 {
                     Email = model.Email,
-                    UserName = model.FirstName
+                    UserName = model.FirstName,
+                    Image = fileUsername
                 };
                 var role = new AppRole
                 {
@@ -71,14 +87,14 @@ namespace AutoPart.Controllers
 
         public async Task<IActionResult> Login([FromForm] LoginViewModel model)
         {
+            var user = await _userManager.FindByEmailAsync(model.Email);
             var result = await _signInManager
-                .PasswordSignInAsync(model.Email, model.Password, false, false);
+                .CheckPasswordSignInAsync(user, model.Password, false);
 
             if (!result.Succeeded)
             {
                 return BadRequest(new { message = "Error! Incorrect data!" });
             }
-            var user = await _userManager.FindByEmailAsync(model.Email);
 
             return Ok(new
             {
