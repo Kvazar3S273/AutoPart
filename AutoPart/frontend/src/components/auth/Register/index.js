@@ -9,10 +9,9 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 //import { REGISTER } from '../../../constants/actionTypes';
 import { ERRORS } from '../../../constants/actionTypes';
-import authTokenRequest from '../../../services/authRequest';
+//import authTokenRequest from '../../../services/authRequest';
 import MyPhotoInput from '../../common/MyPhotoInput';
 
-authTokenRequest
 
 const RegisterPage = () => {
 
