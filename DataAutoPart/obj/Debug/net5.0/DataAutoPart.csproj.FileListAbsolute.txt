@@ -12,3 +12,4 @@ D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.dll
 D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\ref\DataAutoPart.dll
 D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.pdb
 D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.genruntimeconfig.cache
+D:\ШАГ\0 Repository\AutoPart\DataAutoPart\obj\Debug\net5.0\DataAutoPart.csprojAssemblyReference.cache

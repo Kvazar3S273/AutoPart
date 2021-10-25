@@ -34,7 +34,7 @@ namespace AutoPart.Controllers
         }
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> RegisterAsync([FromBody] RegisterViewModel model)
+        public async Task<IActionResult> RegisterAsync([FromForm] RegisterViewModel model)
         {
             string fileUsername = string.Empty;
 

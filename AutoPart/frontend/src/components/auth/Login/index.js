@@ -4,7 +4,7 @@ import MyTextInput from '../../common/MyTextInput';
 import validationFields from './validation';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { LOGIN } from '../../../constants/actionTypes';
+import { LOGIN_AUTH } from '../../../constants/actionTypes';
 import authTokenRequest from '../../../services/authRequest';
 import registerService from '../../../services/register.service';
 import jwt from "jsonwebtoken";
@@ -30,7 +30,7 @@ const LoginPage = () => {
             console.log("Verified:",verifiedData);
             console.log("Verified.roles:", verifiedData.roles);
 
-            dispatch({ type: LOGIN, payload: verifiedData });
+            dispatch({ type: LOGIN_AUTH, payload: verifiedData });
             localStorage.setItem('Current user', jwt_token);         
                    
             authTokenRequest(jwt_token);

@@ -1,7 +1,7 @@
-export const LOGIN = 'LOGIN';
-export const LOGOUT = 'LOGOUT';
-export const REGISTER = 'REGISTER';
 export const ERRORS = 'ERRORS';
-export const REGISTER_START = 'REGISTER_START';
-export const REGISTER_FAILED = 'REGISTER_FAILED';
 export const USERS = 'USERS';
+export const REGISTER_AUTH = "REGISTER_AUTH";
+export const LOGIN_AUTH = "LOGIN_AUTH";
+export const LOG_OUT="LOG_OUT";
+export const REGISTER_BEGIN="REGISTER_BEGIN";
+export const REGISTER_FAIL="REGISTER_FAIL";
