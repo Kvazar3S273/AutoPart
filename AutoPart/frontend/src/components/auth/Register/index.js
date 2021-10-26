@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { RegisterUser } from '../../../actions/auth';
 import Spinner from '../../common/loader';
 import { push } from 'connected-react-router';
+import { useHistory } from 'react-router';
 //import EclipseWidget from '../../common/eclipse';
 
 const RegisterPage = () => {
@@ -23,6 +24,7 @@ const RegisterPage = () => {
         confirmpassword: ''
     }
     const dispatch = useDispatch();
+    const history=useHistory();
     const refFormik = useRef();
     const titleRef = useRef();
     const { load } = useSelector(state => state.auth);
@@ -52,7 +54,7 @@ const RegisterPage = () => {
         }
         catch (error) {
         //var res = err.response.data.errors;
-        console.log("Server is bad register from", errors);
+        console.log("Server is bad register from", error);
     }
 }
 

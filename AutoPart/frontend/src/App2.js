@@ -16,11 +16,12 @@ class App2 extends React.Component {
 
   render() {
     return (
-      <Router>
+      //<Router>
+      <>
         <Header />
         <div className="container">
           <Switch>
-            <Route exact path="/home">
+            <Route exact path="/">
               <HomePage />
             </Route>
 
@@ -38,7 +39,8 @@ class App2 extends React.Component {
 
           </Switch>
         </div>
-      </Router>
+        </>
+      //</Router>
     );
   }
 }

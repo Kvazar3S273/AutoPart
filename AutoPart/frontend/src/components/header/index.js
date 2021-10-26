@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { logoutservice } from '../../services/logout.service';
-import { LOGOUT } from "../../constants/actionTypes";
+import { LOG_OUT } from "../../constants/actionTypes";
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -12,7 +12,7 @@ const Header = () => {
 
     const logout = () => {
         logoutservice.logout();
-        dispatch({ type: LOGOUT });
+        dispatch({ type: LOG_OUT });
         history.push('/');
     };
 

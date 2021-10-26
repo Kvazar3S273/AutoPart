@@ -5,14 +5,15 @@ import './index.css';
 import App2 from './App2';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import store from './store';
+import { ConnectedRouter } from 'connected-react-router';
+import store, { history } from './store';
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
-      <App2 />
-    </Provider>
-  </React.StrictMode>,
+      <ConnectedRouter history={history}>
+        <App2 />
+      </ConnectedRouter>
+    </Provider>,
   document.getElementById('root')
 );
 

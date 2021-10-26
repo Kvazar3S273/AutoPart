@@ -1,6 +1,5 @@
 import { USERS } from "../constants/actionTypes";
 
-
 const initialState ={
    list:[]
 }
