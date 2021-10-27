@@ -12,7 +12,7 @@ const initialState ={
 
 function authReducer(state = initialState, action) {
     const {type, payload} = action;
-    console.log("Reducer data :", payload);
+    //console.log("Reducer data :", payload);
 
     switch(type){
         case REGISTER_AUTH: {

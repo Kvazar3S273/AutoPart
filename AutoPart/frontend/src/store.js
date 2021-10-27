@@ -1,11 +1,11 @@
 import { applyMiddleware, combineReducers, createStore, compose } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import authReducer from "./reducers/authReducer";
-import userReducer from "./reducers/userReducer";
 import errorReducer from "./reducers/errorReducer";
-import { connectRouter, routerMiddleware } from "connected-react-router";
 import { createBrowserHistory } from 'history';
+import { connectRouter, routerMiddleware } from "connected-react-router";
+import userReducer from "./reducers/userReducer";
+//import { composeWithDevTools } from "redux-devtools-extension";
 
 // Create browser history to use in the Redux store
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');

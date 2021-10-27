@@ -7,7 +7,7 @@ const initialState ={
 function userReducer(state = initialState, action)
 {
     const{ type, payload }=action;
-    console.log("Reducer user data :", payload);
+    //console.log("Reducer user data :", payload);
 
     switch(type)
     {

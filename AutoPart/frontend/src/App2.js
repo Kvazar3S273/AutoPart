@@ -12,37 +12,56 @@ import LoginPage from './components/auth/Login';
 import HomePage from './components/home';
 import GetUserList from './components/userlist';
 
-class App2 extends React.Component {
+// class App2 extends React.Component {
 
-  render() {
-    return (
-      //<Router>
-      <>
+//   render() {
+//     return (
+//       //<Router>
+//       <>
+//         <Header />
+//         <div className="container">
+//           <Switch>
+//             <Route exact path="/">
+//               <HomePage />
+//             </Route>
+
+//             <Route exact path="/userlist">
+//               <GetUserList />
+//               </Route> 
+
+//             <Route exact path="/register">
+//               <RegisterPage />
+//             </Route>
+
+//             <Route exact path="/Login">
+//               <LoginPage />
+//             </Route>
+
+//           </Switch>
+//         </div>
+//         </>
+//       //</Router>
+//     );
+//   }
+// }
+
+
+function App2 () {
+
+  return (
+    <>
         <Header />
         <div className="container">
           <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-
-            <Route exact path="/userlist">
-              <GetUserList />
-              </Route> 
-
-            <Route exact path="/register">
-              <RegisterPage />
-            </Route>
-
-            <Route exact path="/Login">
-              <LoginPage />
-            </Route>
-
+            <Route exact path="/home"><HomePage /></Route>
+            <Route exact path="/user"><GetUserList /></Route> 
+            <Route exact path="/register"><RegisterPage /></Route>
+            <Route exact path="/Login"><LoginPage /></Route>
           </Switch>
-        </div>
-        </>
-      //</Router>
-    );
-  }
+        </div>   
+        </>   
+    
+  )
 }
 
 export default App2;

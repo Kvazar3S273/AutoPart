@@ -35,13 +35,15 @@ const RegisterPage = () => {
             Object.entries(values).forEach(([key, value]) => formData.append(key, value));
             dispatch(RegisterUser(formData))
                 .then(result => {
-                    dispatch(push("/"));
+                    dispatch(push('/'));
                 })
                 .catch(ex => {
                     // let answer_errors = {
                     //     email: ''
                     // };
-                    Object.entries(ex.errors).forEach(([key, values]) => {
+                    Object
+                    .entries(ex.errors)
+                    .forEach(([key, values]) => {
                         let str = '';
                         values.forEach(text => str += text + " ");
                         refFormik.current.setFieldError(key, str);

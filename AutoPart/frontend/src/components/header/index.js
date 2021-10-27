@@ -55,7 +55,7 @@ const Header = () => {
                                 <Link className="nav-link" to="/profile">{username}</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" onClick={logout}>Вихід</Link>
+                                <Link className="nav-link" to="/" onClick={logout}>Вихід</Link>
                             </li>
                         </ul>
                     }
