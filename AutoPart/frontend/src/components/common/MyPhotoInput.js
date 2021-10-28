@@ -3,7 +3,8 @@ const MyPhotoInput = ({
     refFormik,
     field
 }) => {
-    const [photo, setPhoto] = useState("http://www.hollywoodprimaryschool.co.uk/wp-content/uploads/male-placeholder-600x600.jpg");
+    //const [photo, setPhoto] = useState("http://www.hollywoodprimaryschool.co.uk/wp-content/uploads/male-placeholder-600x600.jpg");
+    const [photo, setPhoto] = useState("https://i.ibb.co/Hx6XY8w/back.jpg");
 
     const onChangeHandler = (event) => {
         const file = event.currentTarget.files[0];

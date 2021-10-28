@@ -33,9 +33,9 @@ const Header = () => {
                     </ul>
 
                     {role == "admin" ?
-                        < li className="nav-item">
+                        < span className="nav-item">
                             <Link className="nav-link" to="/user">UserList</Link>
-                        </li>
+                        </span>
                         :
                         null
                     }

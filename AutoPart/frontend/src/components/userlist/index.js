@@ -1,19 +1,18 @@
-import {useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {useSelector} from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import http from "../../http_common";
 import { GetUser } from '../../actions/users';
 
 const GetUserList = () => {
     const dispatch = useDispatch();
-    const {userList}=useSelector(state=>state.user);
+    const { userList } = useSelector(state => state.user);
 
-    useEffect(()=>
-    {
+    useEffect(() => {
         dispatch(GetUser());
-    },[]);
-    return(
-        <div>            
+    }, []);
+    return (
+        <>
             <table className="table">
                 <thead className="table table-light">
                     <tr>
@@ -23,18 +22,18 @@ const GetUserList = () => {
                 </thead>
                 <tbody>
                     {userList && userList.map((item) =>
-                            <tr key={item.email}>
-                                <td>
-                                    <img src={http.defaults.baseURL + item.photo}
-                                        alt="user photo"
-                                        width="150"
-                                    />
-                                </td>
-                                <td>{item.email}</td>
-                            </tr>)}
+                        <tr key={item.email}>
+                            <td>
+                                <img src={http.defaults.baseURL + item.photo}
+                                    alt="user photo"
+                                    width="150"
+                                />
+                            </td>
+                            <td>{item.email}</td>
+                        </tr>)}
                 </tbody>
             </table>
-        </div>
+        </>
     )
 }
 

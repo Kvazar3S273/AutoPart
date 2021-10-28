@@ -87,7 +87,8 @@ namespace AutoPart
             {
                 configuration.RootPath = "frontend/build";
             });
-
+            services.AddFluentValidation(x =>
+            x.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
