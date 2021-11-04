@@ -23,12 +23,6 @@ namespace AutoPart.Controllers
         private readonly RoleManager<AppRole> _roleManager;
         private IJwtTokenService _tokenService;
 
-        private readonly IMapper _mapper;
-        public AccountController (IMapper mapper)
-        {
-            _mapper = mapper;
-        }
-
         public AccountController(UserManager<AppUser> userManager,
                                 SignInManager<AppUser> signInManager,
                                 RoleManager<AppRole> roleManager,
@@ -43,7 +37,7 @@ namespace AutoPart.Controllers
         [Route("register")]
         public async Task<IActionResult> RegisterAsync([FromForm] RegisterViewModel model)
         {
-            var user = _mapper.Map<AppUser>(model);
+            //var user = _mapper.Map<AppUser>(model);
             string fileUsername = string.Empty;
 
             if (model.Photo != null)
