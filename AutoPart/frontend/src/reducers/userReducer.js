@@ -1,4 +1,4 @@
-import { USERS } from "../constants/actionTypes";
+import { GET_USERS } from "../constants/actionTypes";
 
 const initialState ={
    list:[]
@@ -6,17 +6,18 @@ const initialState ={
 
 function userReducer(state = initialState, action)
 {
-    const{ type, payload }=action;
-    //console.log("Reducer user data :", payload);
+    const{ type, data }=action;
+    console.log("Reducer user data :", data);
 
     switch(type)
     {
-        case USERS: {
+        case GET_USERS: {
             return {               
-               list:payload
+               list:data
             }            
         }
+        default:
+            return state;
     }
-    return state;
 }
 export default userReducer;

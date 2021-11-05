@@ -32,7 +32,7 @@ const Header = () => {
                         </li>
                     </ul>
 
-                    {role == "admin" ?
+                    {role === "admin" ?
                         < span className="nav-item">
                             <Link className="nav-link" to="/user">UserList</Link>
                         </span>
@@ -40,7 +40,7 @@ const Header = () => {
                         null
                     }
 
-                    {role == "" ?
+                    {role === "" ?
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/login">Вхід</Link>

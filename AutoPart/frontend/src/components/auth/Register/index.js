@@ -28,7 +28,7 @@ const RegisterPage = () => {
     const refFormik = useRef();
     const titleRef = useRef();
     const { load } = useSelector(state => state.auth);
-    const [invalid, setInvalid] = useState([]);
+    //const [invalid, setInvalid] = useState([]);
     const onSubmitHandler = async (values) => {
         try {
             const formData = new FormData();
@@ -38,25 +38,29 @@ const RegisterPage = () => {
                     dispatch(push('/'));
                 })
                 .catch(ex => {
-                    // let answer_errors = {
-                    //     email: ''
-                    // };
+                    let answer_errors = {
+                        email: ''
+                    };
                     Object
                     .entries(ex.errors)
                     .forEach(([key, values]) => {
                         let str = '';
-                        values.forEach(text => str += text + " ");
-                        refFormik.current.setFieldError(key, str);
-                    });
-                    setInvalid(ex.errors.invalid);
+                        values.forEach(text => { 
+                            str += text + " "; 
+                        });
+                        //refFormik.current.setFieldError(key, str);
+                        answer_errors.email=str;
+                        dispatch({type: ERRORS, payloads: answer_errors.email});
+                    })
+                })
+                    //setInvalid(ex.errors.invalid);
                     // answer_errors.email = str;
                     // dispatch({ type: ERRORS, payloads: answer_errors.email });
-                    titleRef.current.scrollIntoView({ behavior: 'smooth' })
-                });
+                    titleRef.current.scrollIntoView({ behavior: 'smooth' });
         }
-        catch (error) {
-        //var res = err.response.data.errors;
-        console.log("Server is bad register from", error);
+        catch (problem) {
+        var res = problem.response.data.errors;
+        console.log("Server is bad register from", res);
     }
 }
 
@@ -72,7 +76,7 @@ return (
     <div className="row">
         <div className="offset-md-3 col-md-6">
             <h1 ref={titleRef} className="text-center">Реєстрація</h1>
-            {invalid && invalid.length>0 &&
+            {/* {invalid && invalid.length>0 &&
                     <div className="alert alert-danger">
                         <ul>
                         {
@@ -86,8 +90,8 @@ return (
                         </ul>
                     </div>
 
-                }
-            {/* {load && <Spinner />} */}
+                } */}
+            {load && <Spinner />}
             <Formik
                 innerRef={refFormik}
                 initialValues={initState}
@@ -100,7 +104,7 @@ return (
                         id="email"
                         type="email"
                     />
-                    {!!errorvalid && <span className="text-danger">{errorvalid}</span>}
+                    {/* {!!errorvalid && <span className="text-danger">{errorvalid}</span>} */}
 
                     <MyTextInput
                         label="Телефон"
@@ -146,9 +150,9 @@ return (
                 </Form>
             </Formik>
         </div>
-        {load && <Spinner />}
+        {/* {load && <Spinner />} */}
     </div>
 )
 }
 
-export default RegisterPage
+export default RegisterPage;

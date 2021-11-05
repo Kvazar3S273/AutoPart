@@ -1,8 +1,8 @@
 import http from '../http_common';
 
 class UserService {
-    getdata(data) {
-        return http.get("api/user", data);        
+    getdata() {
+        return http.get("api/user");        
     }  
 }
 
