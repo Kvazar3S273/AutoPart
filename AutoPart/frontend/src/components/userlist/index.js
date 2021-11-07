@@ -19,7 +19,7 @@ const GetUserList = () => {
             <table className="table">
                 <thead className="table table-light">
                     <tr>
-                        {/* <th scope="col">Id</th> */}
+                        <th scope="col">Id</th>
                         <th scope="col">Image</th>
                         <th scope="col">Name</th>
                     </tr>
@@ -27,7 +27,7 @@ const GetUserList = () => {
                 <tbody>
                     {list && list.map((item) =>
                         <tr key={item.email}>
-                            {/* <td>{item.id}</td> */}
+                            <td>{item.id}</td>
                             <td>
                                 <img src={http.defaults.baseURL + item.photo}
                                     alt="user photo"
@@ -36,7 +36,7 @@ const GetUserList = () => {
                             </td>
                             <td>{item.email}</td>
                             <td>
-                                <Link to={`/edit/${item.id}`}>Edit</Link> ||
+                                <Link to={`/edit/${item.id}`}>Edit</Link> / 
                                 <Link to={`/delete/${item.id}`}>Delete</Link>
                             </td>
                         </tr>)}

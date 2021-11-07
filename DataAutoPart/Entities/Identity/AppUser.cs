@@ -23,5 +23,6 @@ namespace DataAutoPart.Entities.Identity
         
         [StringLength(20)]
         public string Phone { get; set; }
+        //public string ImageProfile { get; set; }
     }
 }
