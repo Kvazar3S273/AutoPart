@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from "react";
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Layout from "./Layout";
 import DefaultRoutes from "../../../routes/DefaultRoutes";
 
@@ -28,3 +28,5 @@ class DefaultLayout extends Component {
         )
     }
 }
+
+export default DefaultLayout;

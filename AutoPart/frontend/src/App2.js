@@ -14,6 +14,7 @@ import {
 // import DeleteUser from './components/userlist/Delete';
 // import EditUser from './components/userlist/Edit';
 const DefaultLayout = React.lazy(() => import('./components/containers/DefaultLayout'));
+const AdminLayout = React.lazy(() => import('./components/containers/AdminLayout'));
 
 function App2() {
 
@@ -21,6 +22,7 @@ function App2() {
     <>
       <Suspense fallback={<div>Загрузка...</div>}>
         <Switch>
+          <Route path="/admin" name="Admin" render={props => <AdminLayout {...props} />} />
           <Route path="/" name="Default" render={props => <DefaultLayout {...props} />} />
         </Switch>
       </Suspense>
