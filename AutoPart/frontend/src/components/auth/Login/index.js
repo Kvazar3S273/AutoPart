@@ -2,12 +2,14 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import MyTextInput from '../../common/MyTextInput';
 import validationFields from './validation';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
 import { LOGIN_AUTH } from '../../../constants/actionTypes';
-import authTokenRequest from '../../../services/authRequest';
+import { useDispatch } from 'react-redux';
 import registerService from '../../../services/register.service';
+import { useHistory } from 'react-router';
 import jwt from "jsonwebtoken";
+import authTokenRequest from '../../../services/authRequest';
+import { isRole } from '../../../actions/auth';
+import { push } from 'connected-react-router';
 
 const LoginPage = () => {
 
@@ -22,18 +24,19 @@ const LoginPage = () => {
             const formData = new FormData();
             Object.entries(values).forEach(([key, value]) => formData.append(key, value));
             const result = await registerService.login(formData);
-          
             console.log("Sended data: ", values);
             console.log("Result data:", result.data.token);
             var jwt_token = result.data.token;
             var verifiedData = jwt.decode(jwt_token);
             console.log("Verified:",verifiedData);
             console.log("Verified.roles:", verifiedData.roles);
-
             dispatch({ type: LOGIN_AUTH, payload: verifiedData });
             localStorage.setItem('Current user', jwt_token);         
-                   
             authTokenRequest(jwt_token);
+            if (isRole(cur_user, 'admin')) {
+                dispatch(push("/admin"));
+                return;
+            } 
             history.push("/");
         }
         catch (errors) {

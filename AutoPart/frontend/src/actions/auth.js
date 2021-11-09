@@ -1,6 +1,6 @@
-import authService from "../services/register.service";
-import { REGISTER_AUTH, REGISTER_BEGIN, REGISTER_FAIL } from "../constants/actionTypes";
-import { push } from "connected-react-router";
+//import authService from "../services/register.service";
+import { LOGIN_AUTH, REGISTER_AUTH, REGISTER_BEGIN, REGISTER_FAIL } from "../constants/actionTypes";
+//import { push } from "connected-react-router";
 import jwt from "jsonwebtoken";
 import register_service from "../services/register.service";
 import authTokenRequest from "../services/authRequest"
@@ -10,19 +10,7 @@ export const RegisterUser = (model) => async (dispatch) => {
     //const history = useHistory();
 
     try {
-        // const result = await authService.register(model);
-        // console.log("register result", result);
-        // var jwt_token = result.data.token;
-        // console.log("Result data token:",result.data.token);
-        // var verifiedData = jwt.decode(jwt_token);
-        // dispatch({type: REGISTER, payload: verifiedData});
-        // localStorage.setItem('Current user',jwt_token);
-        // authTokenRequest(jwt_token);
-        // dispatch({type:REGISTER_START})
-        // setTimeout(() => { dispatch(push("/")) }, 2000);
-        //return Promise.resolve(result);
-
-
+        
         dispatch({ type: REGISTER_BEGIN });
         const result = await register_service.register(model);
         var jwt_token = result.data.token;
@@ -36,13 +24,22 @@ export const RegisterUser = (model) => async (dispatch) => {
         return Promise.resolve(result);
     }
     catch (err) {
-        //console.log("register error", err.responce.data);
-        //setErrors({"Email": "not is valid"} );
-        //return Promise.reject();
-
         const errorsdata = err.response;
-        // console.log("Problem register",error.response.data.errors);
         dispatch({ type: REGISTER_FAIL, payload: errorsdata.data })
         return Promise.reject(errorsdata.data);
     }
 }
+
+export const isRole = (user, role) => {
+    if(Array.isArray(user.roles)) {
+        for(let i =0; i < user.roles.length; i++)
+        {
+            if(user.roles[i]==role)
+                return true;
+        }
+        return false;
+    }
+    else {
+        return user.roles==role;
+    }
+  }

@@ -24,7 +24,7 @@ const RegisterPage = () => {
         confirmpassword: ''
     }
     const dispatch = useDispatch();
-    const history=useHistory();
+    //const history=useHistory();
     const refFormik = useRef();
     const titleRef = useRef();
     const { load } = useSelector(state => state.auth);
