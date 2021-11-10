@@ -10,7 +10,7 @@ export const RegisterUser = (model) => async (dispatch) => {
     //const history = useHistory();
 
     try {
-        
+
         dispatch({ type: REGISTER_BEGIN });
         const result = await register_service.register(model);
         var jwt_token = result.data.token;
@@ -31,15 +31,14 @@ export const RegisterUser = (model) => async (dispatch) => {
 }
 
 export const isRole = (user, role) => {
-    if(Array.isArray(user.roles)) {
-        for(let i =0; i < user.roles.length; i++)
-        {
-            if(user.roles[i]==role)
+    if (Array.isArray(user.roles)) {
+        for (let i = 0; i < user.roles.length; i++) {
+            if (user.roles[i] == role)
                 return true;
         }
         return false;
     }
     else {
-        return user.roles==role;
+        return user.roles == role;
     }
-  }
+}

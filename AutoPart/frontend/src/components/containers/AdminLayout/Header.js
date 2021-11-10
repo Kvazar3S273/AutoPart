@@ -1,18 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-
+import { logoutservice } from '../../../services/logout.service';
+import { LOG_OUT } from '../../../constants/actionTypes';
 import { push } from 'connected-react-router';
 
 const Header = () => {
-    
+
     const dispatch = useDispatch();
 
-    const {isAuth, username} = useSelector(redux => redux.auth);
+    const { isAuth, username } = useSelector(redux => redux.auth);
+    const logout = () => {
+        logoutservice.logout();
+        dispatch({ type: LOG_OUT });
+        dispatch(push('/'));
+    };
+    const { user } = useSelector(res => res.auth);
 
-
-
-    //console.log("Auth user info ", isAuth);
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
@@ -29,28 +33,14 @@ const Header = () => {
                             <Link className="nav-link active" aria-current="page" to="/admin/users">Користувачі</Link>
                         </li>
                     </ul>
-
-                    {/* {!isAuth ?
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/login">Вхід</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/register">Реєструватися</Link>
-                            </li>
-                        </ul>
-                        :
-                        <ul className="navbar-nav">
-                             <li className="nav-item">
-                                <Link className="nav-link" to="/profile">{username}</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/logout" >Вихід</Link>
-                            </li>
-                        </ul>
-                    } */}
-                    
-
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/profile">{user.name}</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link" onClick={logout}>Вихід</Link>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
