@@ -33,7 +33,7 @@ const LoginPage = () => {
             dispatch({ type: LOGIN_AUTH, payload: verifiedData });
             localStorage.setItem('Current user', jwt_token);         
             authTokenRequest(jwt_token);
-            if (isRole(cur_user, 'admin')) {
+            if (isRole(verifiedData, 'admin')) {
                 dispatch(push("/admin"));
                 return;
             } 
@@ -41,7 +41,7 @@ const LoginPage = () => {
         }
         catch (errors) {
             var res = errors.response.data.errors;                   
-            //console.log("Errors:",res);
+            console.log("Errors:",res);
 
         }
 

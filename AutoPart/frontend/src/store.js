@@ -5,7 +5,10 @@ import errorReducer from "./reducers/errorReducer";
 import { createBrowserHistory } from 'history';
 import { connectRouter, routerMiddleware } from "connected-react-router";
 import userReducer from "./reducers/userReducer";
-//import { composeWithDevTools } from "redux-devtools-extension";
+import { composeWithDevTools } from "redux-devtools-extension";
+import devToolsExtension from 'redux-devtools-extension';
+import productReducer from "./reducers/productReducer";
+import cardReducer from "./reducers/cardreducer";
 
 // Create browser history to use in the Redux store
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -20,6 +23,8 @@ const rootReducer = combineReducers({
     auth: authReducer,
     valid: errorReducer,
     user: userReducer,
+    prod:productReducer,
+    card:cardReducer,
     router: connectRouter(history)
 });
 

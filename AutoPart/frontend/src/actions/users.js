@@ -6,7 +6,7 @@ export const GetUser = () => async(dispatch) => {
     try {
         const result = await getuser.getdata(); 
         console.log("Отиманий user:", result.data);        
-        dispatch({type: GET_USERS, data: result.data});    
+        dispatch({type: GET_USERS, datares: result.data});    
     }
     catch(error) {
         console.log("Неможливо отримати користувачів",error);

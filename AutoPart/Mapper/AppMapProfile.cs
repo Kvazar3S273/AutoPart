@@ -15,8 +15,17 @@ namespace AutoPart.Mapper
             CreateMap<RegisterViewModel, AppUser>()
                 .ForMember(x => x.Image, opt => opt.Ignore())
                 .ForMember(x => x.UserName, opt => opt.MapFrom(x => x.Email));
-            //.ForMember(x => x.Image, opt => opt.MapFrom(x => "images/"
-            //    + (string.IsNullOrEmpty(x.Photo) ? "noimage.jpg" : x.Photo)));
+
+            CreateMap<ProductAddViewModel, ProductEntity>()
+                .ForMember(x => x.Image, opt => opt.Ignore());
+
+            CreateMap<ProductEntity, ProductItemViewModel>()
+               .ForMember(x => x.Description, opt => opt.MapFrom(x => "Product Description"))
+               .ForMember(x => x.Image, opt => opt.MapFrom(x => @"\images\" + x.Image))
+               .ForMember(x => x.Category, opt => opt.MapFrom(x => "Accessories"))
+               .ForMember(x => x.Quantity, opt => opt.MapFrom(x => 25))
+               .ForMember(x => x.InventoryStatus, opt => opt.MapFrom(x => "INSTOCK"))
+               .ForMember(x => x.Rating, opt => opt.MapFrom(x => 5));
         }
     }
 }

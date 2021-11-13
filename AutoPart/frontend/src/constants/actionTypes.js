@@ -5,4 +5,6 @@ export const LOGIN_AUTH = "LOGIN_AUTH";
 export const LOG_OUT="LOG_OUT";
 export const REGISTER_BEGIN="REGISTER_BEGIN";
 export const REGISTER_FAIL="REGISTER_FAIL";
+export const GET_PRODUCTS="GET_PRODUCTS";
+export const ADD_TO_CARD="ADD_TO_CARD";
 export const LOGIN_FAIL="LOGIN_FAIL";

@@ -1,6 +1,5 @@
 import { REGISTER_AUTH,LOGIN_AUTH,LOG_OUT,REGISTER_BEGIN,REGISTER_FAIL } from "../constants/actionTypes";
 
-
 const initialState ={
     isAuth: false,
     username: "",
@@ -8,7 +7,6 @@ const initialState ={
     load:false
   
 }
-
 
 function authReducer(state = initialState, action) {
     const {type, payload} = action;

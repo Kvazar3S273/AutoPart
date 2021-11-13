@@ -1,20 +1,18 @@
 import { GET_USERS } from "../constants/actionTypes";
 
-const initialState ={
-   list:[]
+const initialState = {
+    list: []
 }
 
-function userReducer(state = initialState, action)
-{
-    const{ type, data }=action;
-    console.log("Reducer user data :", data);
+function userReducer(state = initialState, action) {
+    const { type, datares } = action;
+    console.log("Reducer user data :", datares);
 
-    switch(type)
-    {
+    switch (type) {
         case GET_USERS: {
-            return {               
-               list:data
-            }            
+            return {
+                list: datares
+            }
         }
         default:
             return state;
