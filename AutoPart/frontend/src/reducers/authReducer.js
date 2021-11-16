@@ -2,7 +2,8 @@ import { REGISTER_AUTH,LOGIN_AUTH,LOG_OUT,REGISTER_BEGIN,REGISTER_FAIL } from ".
 
 const initialState ={
     isAuth: false,
-    username: "",
+    //username: "",
+    user:{},
     role:"",
     load:false
   
@@ -16,23 +17,26 @@ function authReducer(state = initialState, action) {
         case REGISTER_AUTH: {
             return {               
                isAuth: true,
-               username: payload.name,
-               role:payload.roles
+               //username: payload.name,
+               user: payload//,
+               //role:payload.roles
             }            
         }
         case LOGIN_AUTH: {
             return {
                 isAuth: true,
-                username: payload.name,
-                role:payload.roles,
+                //username: payload.name,
+                user: payload,
+                //role:payload.roles,
                 load:false
             }
         }
         case LOG_OUT: {
             return {
                 isAuth: false,
-                username: "",
-                role:""
+                //username: "",
+                user: {}//,
+                //role:""
             }
         }
         case REGISTER_BEGIN:{
